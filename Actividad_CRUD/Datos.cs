@@ -100,7 +100,9 @@ namespace Actividad_CRUD
                 }
                 catch (Exception ex)
                 {
+
                     connection.Close();
+                //hjhjjhhj
                     return null;
                 }
             }
