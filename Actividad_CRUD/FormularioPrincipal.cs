@@ -16,5 +16,15 @@ namespace Actividad_CRUD
         {
             InitializeComponent();
         }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormularioPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

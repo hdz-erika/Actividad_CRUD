@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tiendaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="IDCategoria" />
+          </Key>
+          <Property Name="IDCategoria" Type="int" Nullable="false" />
+          <Property Name="NombreCategoria" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="IDEmpleado" />
+          </Key>
+          <Property Name="IDEmpleado" Type="int" Nullable="false" />
+          <Property Name="NombreEmpleado" Type="varchar" MaxLength="100" />
+          <Property Name="Cargo" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Inventario">
+          <Key>
+            <PropertyRef Name="IDInventario" />
+          </Key>
+          <Property Name="IDInventario" Type="int" Nullable="false" />
+          <Property Name="IDProducto" Type="int" />
+          <Property Name="CantidadEnStock" Type="int" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="IDProducto" />
+          </Key>
+          <Property Name="IDProducto" Type="int" Nullable="false" />
+          <Property Name="NombreProducto" Type="varchar" MaxLength="100" />
+          <Property Name="IDCategoria" Type="int" />
+          <Property Name="PrecioUnitario" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+          </Key>
+          <Property Name="IDUsuario" Type="int" Nullable="false" />
+          <Property Name="NombreUsuario" Type="varchar" MaxLength="20" />
+          <Property Name="Contraseña" Type="varchar" MaxLength="100" />
+          <Property Name="TipoUsuario" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="IDVenta" />
+          </Key>
+          <Property Name="IDVenta" Type="int" Nullable="false" />
+          <Property Name="IDProducto" Type="int" />
+          <Property Name="FechaVenta" Type="date" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="MontoVenta" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <Association Name="FK__Inventari__IDPro__440B1D61">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Productos__IDCat__398D8EEE">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="IDCategoria" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ventas__IDProduc__3C69FB99">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="AgregarCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreCategoria" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AgregarEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="Cargo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AgregarInventario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDProducto" Type="int" Mode="In" />
+          <Parameter Name="CantidadEnStock" Type="int" Mode="In" />
+        </Function>
+        <Function Name="AgregarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreProducto" Type="varchar" Mode="In" />
+          <Parameter Name="IDCategoria" Type="int" Mode="In" />
+          <Parameter Name="PrecioUnitario" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="AgregarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombreUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="Contraseña" Type="varchar" Mode="In" />
+          <Parameter Name="TipoUsuario" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="AgregarVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDProducto" Type="int" Mode="In" />
+          <Parameter Name="FechaVenta" Type="date" Mode="In" />
+          <Parameter Name="Cantidad" Type="int" Mode="In" />
+          <Parameter Name="MontoVenta" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="EliminarCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDCategoria" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDEmpleado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarInventario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDInventario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDProducto" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDUsuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="EliminarVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDVenta" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ModificarCategoria" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDCategoria" Type="int" Mode="In" />
+          <Parameter Name="NuevoNombreCategoria" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ModificarEmpleado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDEmpleado" Type="int" Mode="In" />
+          <Parameter Name="NuevoNombreEmpleado" Type="varchar" Mode="In" />
+          <Parameter Name="NuevoCargo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ModificarInventario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDInventario" Type="int" Mode="In" />
+          <Parameter Name="IDProducto" Type="int" Mode="In" />
+          <Parameter Name="NuevaCantidadEnStock" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ModificarProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDProducto" Type="int" Mode="In" />
+          <Parameter Name="NuevoNombreProducto" Type="varchar" Mode="In" />
+          <Parameter Name="NuevaIDCategoria" Type="int" Mode="In" />
+          <Parameter Name="NuevoPrecioUnitario" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="ModificarUsuario" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDUsuario" Type="int" Mode="In" />
+          <Parameter Name="NuevoNombreUsuario" Type="varchar" Mode="In" />
+          <Parameter Name="NuevaContraseña" Type="varchar" Mode="In" />
+          <Parameter Name="NuevoTipoUsuario" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ModificarVenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IDVenta" Type="int" Mode="In" />
+          <Parameter Name="IDProducto" Type="int" Mode="In" />
+          <Parameter Name="FechaVenta" Type="date" Mode="In" />
+          <Parameter Name="Cantidad" Type="int" Mode="In" />
+          <Parameter Name="MontoVenta" Type="decimal" Mode="In" />
+        </Function>
+        <EntityContainer Name="tiendaModelStoreContainer">
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Inventario" EntityType="Self.Inventario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ventas" EntityType="Self.Ventas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Inventari__IDPro__440B1D61" Association="Self.FK__Inventari__IDPro__440B1D61">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Inventario" EntitySet="Inventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Productos__IDCat__398D8EEE" Association="Self.FK__Productos__IDCat__398D8EEE">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ventas__IDProduc__3C69FB99" Association="Self.FK__Ventas__IDProduc__3C69FB99">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tiendaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="IDCategoria" />
+          </Key>
+          <Property Name="IDCategoria" Type="Int32" Nullable="false" />
+          <Property Name="NombreCategoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__IDCat__398D8EEE" FromRole="Categorias" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Empleados">
+          <Key>
+            <PropertyRef Name="IDEmpleado" />
+          </Key>
+          <Property Name="IDEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="NombreEmpleado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Cargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Inventario">
+          <Key>
+            <PropertyRef Name="IDInventario" />
+          </Key>
+          <Property Name="IDInventario" Type="Int32" Nullable="false" />
+          <Property Name="IDProducto" Type="Int32" />
+          <Property Name="CantidadEnStock" Type="Int32" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Inventari__IDPro__440B1D61" FromRole="Inventario" ToRole="Productos" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="IDProducto" />
+          </Key>
+          <Property Name="IDProducto" Type="Int32" Nullable="false" />
+          <Property Name="NombreProducto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IDCategoria" Type="Int32" />
+          <Property Name="PrecioUnitario" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Categorias" Relationship="Self.FK__Productos__IDCat__398D8EEE" FromRole="Productos" ToRole="Categorias" />
+          <NavigationProperty Name="Inventario" Relationship="Self.FK__Inventari__IDPro__440B1D61" FromRole="Productos" ToRole="Inventario" />
+          <NavigationProperty Name="Ventas" Relationship="Self.FK__Ventas__IDProduc__3C69FB99" FromRole="Productos" ToRole="Ventas" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IDUsuario" />
+          </Key>
+          <Property Name="IDUsuario" Type="Int32" Nullable="false" />
+          <Property Name="NombreUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TipoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Ventas">
+          <Key>
+            <PropertyRef Name="IDVenta" />
+          </Key>
+          <Property Name="IDVenta" Type="Int32" Nullable="false" />
+          <Property Name="IDProducto" Type="Int32" />
+          <Property Name="FechaVenta" Type="DateTime" Precision="0" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="MontoVenta" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Ventas__IDProduc__3C69FB99" FromRole="Ventas" ToRole="Productos" />
+        </EntityType>
+        <Association Name="FK__Productos__IDCat__398D8EEE">
+          <End Role="Categorias" Type="Self.Categorias" Multiplicity="0..1" />
+          <End Role="Productos" Type="Self.Productos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categorias">
+              <PropertyRef Name="IDCategoria" />
+            </Principal>
+            <Dependent Role="Productos">
+              <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventari__IDPro__440B1D61">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="Inventario">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Ventas__IDProduc__3C69FB99">
+          <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
+          <End Role="Ventas" Type="Self.Ventas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Productos">
+              <PropertyRef Name="IDProducto" />
+            </Principal>
+            <Dependent Role="Ventas">
+              <PropertyRef Name="IDProducto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tiendaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+          <EntitySet Name="Empleados" EntityType="Self.Empleados" />
+          <EntitySet Name="Inventario" EntityType="Self.Inventario" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <EntitySet Name="Ventas" EntityType="Self.Ventas" />
+          <AssociationSet Name="FK__Productos__IDCat__398D8EEE" Association="Self.FK__Productos__IDCat__398D8EEE">
+            <End Role="Categorias" EntitySet="Categorias" />
+            <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventari__IDPro__440B1D61" Association="Self.FK__Inventari__IDPro__440B1D61">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Inventario" EntitySet="Inventario" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Ventas__IDProduc__3C69FB99" Association="Self.FK__Ventas__IDProduc__3C69FB99">
+            <End Role="Productos" EntitySet="Productos" />
+            <End Role="Ventas" EntitySet="Ventas" />
+          </AssociationSet>
+          <FunctionImport Name="AgregarCategoria">
+            <Parameter Name="NombreCategoria" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AgregarEmpleado">
+            <Parameter Name="NombreEmpleado" Mode="In" Type="String" />
+            <Parameter Name="Cargo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AgregarInventario">
+            <Parameter Name="IDProducto" Mode="In" Type="Int32" />
+            <Parameter Name="CantidadEnStock" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="AgregarProducto">
+            <Parameter Name="NombreProducto" Mode="In" Type="String" />
+            <Parameter Name="IDCategoria" Mode="In" Type="Int32" />
+            <Parameter Name="PrecioUnitario" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="AgregarUsuario">
+            <Parameter Name="NombreUsuario" Mode="In" Type="String" />
+            <Parameter Name="Contraseña" Mode="In" Type="String" />
+            <Parameter Name="TipoUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AgregarVenta">
+            <Parameter Name="IDProducto" Mode="In" Type="Int32" />
+            <Parameter Name="FechaVenta" Mode="In" Type="DateTime" />
+            <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="MontoVenta" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarCategoria">
+            <Parameter Name="IDCategoria" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarEmpleado">
+            <Parameter Name="IDEmpleado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarInventario">
+            <Parameter Name="IDInventario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarProducto">
+            <Parameter Name="IDProducto" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarUsuario">
+            <Parameter Name="IDUsuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="EliminarVenta">
+            <Parameter Name="IDVenta" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarCategoria">
+            <Parameter Name="IDCategoria" Mode="In" Type="Int32" />
+            <Parameter Name="NuevoNombreCategoria" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarEmpleado">
+            <Parameter Name="IDEmpleado" Mode="In" Type="Int32" />
+            <Parameter Name="NuevoNombreEmpleado" Mode="In" Type="String" />
+            <Parameter Name="NuevoCargo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarInventario">
+            <Parameter Name="IDInventario" Mode="In" Type="Int32" />
+            <Parameter Name="IDProducto" Mode="In" Type="Int32" />
+            <Parameter Name="NuevaCantidadEnStock" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarProducto">
+            <Parameter Name="IDProducto" Mode="In" Type="Int32" />
+            <Parameter Name="NuevoNombreProducto" Mode="In" Type="String" />
+            <Parameter Name="NuevaIDCategoria" Mode="In" Type="Int32" />
+            <Parameter Name="NuevoPrecioUnitario" Mode="In" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarUsuario">
+            <Parameter Name="IDUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="NuevoNombreUsuario" Mode="In" Type="String" />
+            <Parameter Name="NuevaContraseña" Mode="In" Type="String" />
+            <Parameter Name="NuevoTipoUsuario" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ModificarVenta">
+            <Parameter Name="IDVenta" Mode="In" Type="Int32" />
+            <Parameter Name="IDProducto" Mode="In" Type="Int32" />
+            <Parameter Name="FechaVenta" Mode="In" Type="DateTime" />
+            <Parameter Name="Cantidad" Mode="In" Type="Int32" />
+            <Parameter Name="MontoVenta" Mode="In" Type="Decimal" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tiendaModelStoreContainer" CdmEntityContainer="tiendaEntities">
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="tiendaModel.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleados">
+            <EntityTypeMapping TypeName="tiendaModel.Empleados">
+              <MappingFragment StoreEntitySet="Empleados">
+                <ScalarProperty Name="IDEmpleado" ColumnName="IDEmpleado" />
+                <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
+                <ScalarProperty Name="Cargo" ColumnName="Cargo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventario">
+            <EntityTypeMapping TypeName="tiendaModel.Inventario">
+              <MappingFragment StoreEntitySet="Inventario">
+                <ScalarProperty Name="IDInventario" ColumnName="IDInventario" />
+                <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+                <ScalarProperty Name="CantidadEnStock" ColumnName="CantidadEnStock" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="tiendaModel.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+                <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
+                <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
+                <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="tiendaModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
+                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
+                <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
+                <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ventas">
+            <EntityTypeMapping TypeName="tiendaModel.Ventas">
+              <MappingFragment StoreEntitySet="Ventas">
+                <ScalarProperty Name="IDVenta" ColumnName="IDVenta" />
+                <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
+                <ScalarProperty Name="FechaVenta" ColumnName="FechaVenta" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="MontoVenta" ColumnName="MontoVenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AgregarCategoria" FunctionName="tiendaModel.Store.AgregarCategoria" />
+          <FunctionImportMapping FunctionImportName="AgregarEmpleado" FunctionName="tiendaModel.Store.AgregarEmpleado" />
+          <FunctionImportMapping FunctionImportName="AgregarInventario" FunctionName="tiendaModel.Store.AgregarInventario" />
+          <FunctionImportMapping FunctionImportName="AgregarProducto" FunctionName="tiendaModel.Store.AgregarProducto" />
+          <FunctionImportMapping FunctionImportName="AgregarUsuario" FunctionName="tiendaModel.Store.AgregarUsuario" />
+          <FunctionImportMapping FunctionImportName="AgregarVenta" FunctionName="tiendaModel.Store.AgregarVenta" />
+          <FunctionImportMapping FunctionImportName="EliminarCategoria" FunctionName="tiendaModel.Store.EliminarCategoria" />
+          <FunctionImportMapping FunctionImportName="EliminarEmpleado" FunctionName="tiendaModel.Store.EliminarEmpleado" />
+          <FunctionImportMapping FunctionImportName="EliminarInventario" FunctionName="tiendaModel.Store.EliminarInventario" />
+          <FunctionImportMapping FunctionImportName="EliminarProducto" FunctionName="tiendaModel.Store.EliminarProducto" />
+          <FunctionImportMapping FunctionImportName="EliminarUsuario" FunctionName="tiendaModel.Store.EliminarUsuario" />
+          <FunctionImportMapping FunctionImportName="EliminarVenta" FunctionName="tiendaModel.Store.EliminarVenta" />
+          <FunctionImportMapping FunctionImportName="ModificarCategoria" FunctionName="tiendaModel.Store.ModificarCategoria" />
+          <FunctionImportMapping FunctionImportName="ModificarEmpleado" FunctionName="tiendaModel.Store.ModificarEmpleado" />
+          <FunctionImportMapping FunctionImportName="ModificarInventario" FunctionName="tiendaModel.Store.ModificarInventario" />
+          <FunctionImportMapping FunctionImportName="ModificarProducto" FunctionName="tiendaModel.Store.ModificarProducto" />
+          <FunctionImportMapping FunctionImportName="ModificarUsuario" FunctionName="tiendaModel.Store.ModificarUsuario" />
+          <FunctionImportMapping FunctionImportName="ModificarVenta" FunctionName="tiendaModel.Store.ModificarVenta" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

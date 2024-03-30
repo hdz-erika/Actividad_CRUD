@@ -13,7 +13,7 @@ namespace Actividad_CRUD
         //Conección a la base de datos "tienda"
         public string Conexion()
         {
-            string conectionString = @"Data Source =DESKTOP-7789AN9\SQLEXPRESS; Initial Catalog = tienda; Integrated Security = True;";
+            string conectionString = @"Data Source =DESKTOP-RELURNF\SQLEXPRESS; Initial Catalog = tienda; Integrated Security = True;";
             return conectionString;
         }
         //Aquí van las tablas
