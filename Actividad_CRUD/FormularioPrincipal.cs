@@ -26,5 +26,15 @@ namespace Actividad_CRUD
         {
 
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gbProductos_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
