@@ -4,19 +4,19 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="tiendaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="tiendaModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categorias">
           <Key>
             <PropertyRef Name="IDCategoria" />
           </Key>
-          <Property Name="IDCategoria" Type="int" Nullable="false" />
+          <Property Name="IDCategoria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NombreCategoria" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Empleados">
           <Key>
             <PropertyRef Name="IDEmpleado" />
           </Key>
-          <Property Name="IDEmpleado" Type="int" Nullable="false" />
+          <Property Name="IDEmpleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NombreEmpleado" Type="varchar" MaxLength="100" />
           <Property Name="Cargo" Type="varchar" MaxLength="100" />
         </EntityType>
@@ -24,7 +24,7 @@
           <Key>
             <PropertyRef Name="IDInventario" />
           </Key>
-          <Property Name="IDInventario" Type="int" Nullable="false" />
+          <Property Name="IDInventario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDProducto" Type="int" />
           <Property Name="CantidadEnStock" Type="int" />
         </EntityType>
@@ -32,7 +32,7 @@
           <Key>
             <PropertyRef Name="IDProducto" />
           </Key>
-          <Property Name="IDProducto" Type="int" Nullable="false" />
+          <Property Name="IDProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NombreProducto" Type="varchar" MaxLength="100" />
           <Property Name="IDCategoria" Type="int" />
           <Property Name="PrecioUnitario" Type="decimal" Precision="10" Scale="2" />
@@ -41,22 +41,23 @@
           <Key>
             <PropertyRef Name="IDUsuario" />
           </Key>
-          <Property Name="IDUsuario" Type="int" Nullable="false" />
+          <Property Name="IDUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NombreUsuario" Type="varchar" MaxLength="20" />
           <Property Name="Contraseña" Type="varchar" MaxLength="100" />
           <Property Name="TipoUsuario" Type="varchar" MaxLength="50" />
+          <Property Name="IDEmpleado" Type="int" />
         </EntityType>
         <EntityType Name="Ventas">
           <Key>
             <PropertyRef Name="IDVenta" />
           </Key>
-          <Property Name="IDVenta" Type="int" Nullable="false" />
+          <Property Name="IDVenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IDProducto" Type="int" />
           <Property Name="FechaVenta" Type="date" />
           <Property Name="Cantidad" Type="int" />
           <Property Name="MontoVenta" Type="decimal" Precision="10" Scale="2" />
         </EntityType>
-        <Association Name="FK__Inventari__IDPro__440B1D61">
+        <Association Name="FK__Inventari__IDPro__44FF419A">
           <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
           <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -77,6 +78,18 @@
             </Principal>
             <Dependent Role="Productos">
               <PropertyRef Name="IDCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Usuarios__IDEmpl__4222D4EF">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IDEmpleado" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IDEmpleado" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -170,20 +183,24 @@
           <Parameter Name="Cantidad" Type="int" Mode="In" />
           <Parameter Name="MontoVenta" Type="decimal" Mode="In" />
         </Function>
-        <EntityContainer Name="tiendaModelStoreContainer">
+        <EntityContainer Name="tiendaModel1StoreContainer">
           <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Empleados" EntityType="Self.Empleados" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventario" EntityType="Self.Inventario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ventas" EntityType="Self.Ventas" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Inventari__IDPro__440B1D61" Association="Self.FK__Inventari__IDPro__440B1D61">
+          <AssociationSet Name="FK__Inventari__IDPro__44FF419A" Association="Self.FK__Inventari__IDPro__44FF419A">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="Inventario" EntitySet="Inventario" />
           </AssociationSet>
           <AssociationSet Name="FK__Productos__IDCat__398D8EEE" Association="Self.FK__Productos__IDCat__398D8EEE">
             <End Role="Categorias" EntitySet="Categorias" />
             <End Role="Productos" EntitySet="Productos" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Usuarios__IDEmpl__4222D4EF" Association="Self.FK__Usuarios__IDEmpl__4222D4EF">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
           <AssociationSet Name="FK__Ventas__IDProduc__3C69FB99" Association="Self.FK__Ventas__IDProduc__3C69FB99">
             <End Role="Productos" EntitySet="Productos" />
@@ -194,12 +211,12 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="tiendaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="tiendaModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Categorias">
           <Key>
             <PropertyRef Name="IDCategoria" />
           </Key>
-          <Property Name="IDCategoria" Type="Int32" Nullable="false" />
+          <Property Name="IDCategoria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreCategoria" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Productos" Relationship="Self.FK__Productos__IDCat__398D8EEE" FromRole="Categorias" ToRole="Productos" />
         </EntityType>
@@ -207,45 +224,48 @@
           <Key>
             <PropertyRef Name="IDEmpleado" />
           </Key>
-          <Property Name="IDEmpleado" Type="Int32" Nullable="false" />
+          <Property Name="IDEmpleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreEmpleado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Cargo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK__Usuarios__IDEmpl__4222D4EF" FromRole="Empleados" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Inventario">
           <Key>
             <PropertyRef Name="IDInventario" />
           </Key>
-          <Property Name="IDInventario" Type="Int32" Nullable="false" />
+          <Property Name="IDInventario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDProducto" Type="Int32" />
           <Property Name="CantidadEnStock" Type="Int32" />
-          <NavigationProperty Name="Productos" Relationship="Self.FK__Inventari__IDPro__440B1D61" FromRole="Inventario" ToRole="Productos" />
+          <NavigationProperty Name="Productos" Relationship="Self.FK__Inventari__IDPro__44FF419A" FromRole="Inventario" ToRole="Productos" />
         </EntityType>
         <EntityType Name="Productos">
           <Key>
             <PropertyRef Name="IDProducto" />
           </Key>
-          <Property Name="IDProducto" Type="Int32" Nullable="false" />
+          <Property Name="IDProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreProducto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="IDCategoria" Type="Int32" />
           <Property Name="PrecioUnitario" Type="Decimal" Precision="10" Scale="2" />
           <NavigationProperty Name="Categorias" Relationship="Self.FK__Productos__IDCat__398D8EEE" FromRole="Productos" ToRole="Categorias" />
-          <NavigationProperty Name="Inventario" Relationship="Self.FK__Inventari__IDPro__440B1D61" FromRole="Productos" ToRole="Inventario" />
+          <NavigationProperty Name="Inventario" Relationship="Self.FK__Inventari__IDPro__44FF419A" FromRole="Productos" ToRole="Inventario" />
           <NavigationProperty Name="Ventas" Relationship="Self.FK__Ventas__IDProduc__3C69FB99" FromRole="Productos" ToRole="Ventas" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
             <PropertyRef Name="IDUsuario" />
           </Key>
-          <Property Name="IDUsuario" Type="Int32" Nullable="false" />
+          <Property Name="IDUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NombreUsuario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Contraseña" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="TipoUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDEmpleado" Type="Int32" />
+          <NavigationProperty Name="Empleados" Relationship="Self.FK__Usuarios__IDEmpl__4222D4EF" FromRole="Usuarios" ToRole="Empleados" />
         </EntityType>
         <EntityType Name="Ventas">
           <Key>
             <PropertyRef Name="IDVenta" />
           </Key>
-          <Property Name="IDVenta" Type="Int32" Nullable="false" />
+          <Property Name="IDVenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="IDProducto" Type="Int32" />
           <Property Name="FechaVenta" Type="DateTime" Precision="0" />
           <Property Name="Cantidad" Type="Int32" />
@@ -264,7 +284,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Inventari__IDPro__440B1D61">
+        <Association Name="FK__Usuarios__IDEmpl__4222D4EF">
+          <End Role="Empleados" Type="Self.Empleados" Multiplicity="0..1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleados">
+              <PropertyRef Name="IDEmpleado" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="IDEmpleado" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Inventari__IDPro__44FF419A">
           <End Role="Productos" Type="Self.Productos" Multiplicity="0..1" />
           <End Role="Inventario" Type="Self.Inventario" Multiplicity="*" />
           <ReferentialConstraint>
@@ -288,7 +320,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="tiendaEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="tiendaEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categorias" EntityType="Self.Categorias" />
           <EntitySet Name="Empleados" EntityType="Self.Empleados" />
           <EntitySet Name="Inventario" EntityType="Self.Inventario" />
@@ -299,7 +331,11 @@
             <End Role="Categorias" EntitySet="Categorias" />
             <End Role="Productos" EntitySet="Productos" />
           </AssociationSet>
-          <AssociationSet Name="FK__Inventari__IDPro__440B1D61" Association="Self.FK__Inventari__IDPro__440B1D61">
+          <AssociationSet Name="FK__Usuarios__IDEmpl__4222D4EF" Association="Self.FK__Usuarios__IDEmpl__4222D4EF">
+            <End Role="Empleados" EntitySet="Empleados" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Inventari__IDPro__44FF419A" Association="Self.FK__Inventari__IDPro__44FF419A">
             <End Role="Productos" EntitySet="Productos" />
             <End Role="Inventario" EntitySet="Inventario" />
           </AssociationSet>
@@ -391,9 +427,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="tiendaModelStoreContainer" CdmEntityContainer="tiendaEntities">
+        <EntityContainerMapping StorageEntityContainer="tiendaModel1StoreContainer" CdmEntityContainer="tiendaEntities1">
           <EntitySetMapping Name="Categorias">
-            <EntityTypeMapping TypeName="tiendaModel.Categorias">
+            <EntityTypeMapping TypeName="tiendaModel1.Categorias">
               <MappingFragment StoreEntitySet="Categorias">
                 <ScalarProperty Name="IDCategoria" ColumnName="IDCategoria" />
                 <ScalarProperty Name="NombreCategoria" ColumnName="NombreCategoria" />
@@ -401,7 +437,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Empleados">
-            <EntityTypeMapping TypeName="tiendaModel.Empleados">
+            <EntityTypeMapping TypeName="tiendaModel1.Empleados">
               <MappingFragment StoreEntitySet="Empleados">
                 <ScalarProperty Name="IDEmpleado" ColumnName="IDEmpleado" />
                 <ScalarProperty Name="NombreEmpleado" ColumnName="NombreEmpleado" />
@@ -410,7 +446,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inventario">
-            <EntityTypeMapping TypeName="tiendaModel.Inventario">
+            <EntityTypeMapping TypeName="tiendaModel1.Inventario">
               <MappingFragment StoreEntitySet="Inventario">
                 <ScalarProperty Name="IDInventario" ColumnName="IDInventario" />
                 <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
@@ -419,7 +455,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Productos">
-            <EntityTypeMapping TypeName="tiendaModel.Productos">
+            <EntityTypeMapping TypeName="tiendaModel1.Productos">
               <MappingFragment StoreEntitySet="Productos">
                 <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
                 <ScalarProperty Name="NombreProducto" ColumnName="NombreProducto" />
@@ -429,17 +465,18 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="tiendaModel.Usuarios">
+            <EntityTypeMapping TypeName="tiendaModel1.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
                 <ScalarProperty Name="IDUsuario" ColumnName="IDUsuario" />
                 <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
                 <ScalarProperty Name="Contraseña" ColumnName="Contraseña" />
                 <ScalarProperty Name="TipoUsuario" ColumnName="TipoUsuario" />
+                <ScalarProperty Name="IDEmpleado" ColumnName="IDEmpleado" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ventas">
-            <EntityTypeMapping TypeName="tiendaModel.Ventas">
+            <EntityTypeMapping TypeName="tiendaModel1.Ventas">
               <MappingFragment StoreEntitySet="Ventas">
                 <ScalarProperty Name="IDVenta" ColumnName="IDVenta" />
                 <ScalarProperty Name="IDProducto" ColumnName="IDProducto" />
@@ -449,24 +486,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="AgregarCategoria" FunctionName="tiendaModel.Store.AgregarCategoria" />
-          <FunctionImportMapping FunctionImportName="AgregarEmpleado" FunctionName="tiendaModel.Store.AgregarEmpleado" />
-          <FunctionImportMapping FunctionImportName="AgregarInventario" FunctionName="tiendaModel.Store.AgregarInventario" />
-          <FunctionImportMapping FunctionImportName="AgregarProducto" FunctionName="tiendaModel.Store.AgregarProducto" />
-          <FunctionImportMapping FunctionImportName="AgregarUsuario" FunctionName="tiendaModel.Store.AgregarUsuario" />
-          <FunctionImportMapping FunctionImportName="AgregarVenta" FunctionName="tiendaModel.Store.AgregarVenta" />
-          <FunctionImportMapping FunctionImportName="EliminarCategoria" FunctionName="tiendaModel.Store.EliminarCategoria" />
-          <FunctionImportMapping FunctionImportName="EliminarEmpleado" FunctionName="tiendaModel.Store.EliminarEmpleado" />
-          <FunctionImportMapping FunctionImportName="EliminarInventario" FunctionName="tiendaModel.Store.EliminarInventario" />
-          <FunctionImportMapping FunctionImportName="EliminarProducto" FunctionName="tiendaModel.Store.EliminarProducto" />
-          <FunctionImportMapping FunctionImportName="EliminarUsuario" FunctionName="tiendaModel.Store.EliminarUsuario" />
-          <FunctionImportMapping FunctionImportName="EliminarVenta" FunctionName="tiendaModel.Store.EliminarVenta" />
-          <FunctionImportMapping FunctionImportName="ModificarCategoria" FunctionName="tiendaModel.Store.ModificarCategoria" />
-          <FunctionImportMapping FunctionImportName="ModificarEmpleado" FunctionName="tiendaModel.Store.ModificarEmpleado" />
-          <FunctionImportMapping FunctionImportName="ModificarInventario" FunctionName="tiendaModel.Store.ModificarInventario" />
-          <FunctionImportMapping FunctionImportName="ModificarProducto" FunctionName="tiendaModel.Store.ModificarProducto" />
-          <FunctionImportMapping FunctionImportName="ModificarUsuario" FunctionName="tiendaModel.Store.ModificarUsuario" />
-          <FunctionImportMapping FunctionImportName="ModificarVenta" FunctionName="tiendaModel.Store.ModificarVenta" />
+          <FunctionImportMapping FunctionImportName="AgregarCategoria" FunctionName="tiendaModel1.Store.AgregarCategoria" />
+          <FunctionImportMapping FunctionImportName="AgregarEmpleado" FunctionName="tiendaModel1.Store.AgregarEmpleado" />
+          <FunctionImportMapping FunctionImportName="AgregarInventario" FunctionName="tiendaModel1.Store.AgregarInventario" />
+          <FunctionImportMapping FunctionImportName="AgregarProducto" FunctionName="tiendaModel1.Store.AgregarProducto" />
+          <FunctionImportMapping FunctionImportName="AgregarUsuario" FunctionName="tiendaModel1.Store.AgregarUsuario" />
+          <FunctionImportMapping FunctionImportName="AgregarVenta" FunctionName="tiendaModel1.Store.AgregarVenta" />
+          <FunctionImportMapping FunctionImportName="EliminarCategoria" FunctionName="tiendaModel1.Store.EliminarCategoria" />
+          <FunctionImportMapping FunctionImportName="EliminarEmpleado" FunctionName="tiendaModel1.Store.EliminarEmpleado" />
+          <FunctionImportMapping FunctionImportName="EliminarInventario" FunctionName="tiendaModel1.Store.EliminarInventario" />
+          <FunctionImportMapping FunctionImportName="EliminarProducto" FunctionName="tiendaModel1.Store.EliminarProducto" />
+          <FunctionImportMapping FunctionImportName="EliminarUsuario" FunctionName="tiendaModel1.Store.EliminarUsuario" />
+          <FunctionImportMapping FunctionImportName="EliminarVenta" FunctionName="tiendaModel1.Store.EliminarVenta" />
+          <FunctionImportMapping FunctionImportName="ModificarCategoria" FunctionName="tiendaModel1.Store.ModificarCategoria" />
+          <FunctionImportMapping FunctionImportName="ModificarEmpleado" FunctionName="tiendaModel1.Store.ModificarEmpleado" />
+          <FunctionImportMapping FunctionImportName="ModificarInventario" FunctionName="tiendaModel1.Store.ModificarInventario" />
+          <FunctionImportMapping FunctionImportName="ModificarProducto" FunctionName="tiendaModel1.Store.ModificarProducto" />
+          <FunctionImportMapping FunctionImportName="ModificarUsuario" FunctionName="tiendaModel1.Store.ModificarUsuario" />
+          <FunctionImportMapping FunctionImportName="ModificarVenta" FunctionName="tiendaModel1.Store.ModificarVenta" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

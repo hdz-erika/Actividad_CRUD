@@ -18,5 +18,8 @@ namespace Actividad_CRUD
         public string NombreUsuario { get; set; }
         public string Contraseña { get; set; }
         public string TipoUsuario { get; set; }
+        public Nullable<int> IDEmpleado { get; set; }
+    
+        public virtual Empleados Empleados { get; set; }
     }
 }

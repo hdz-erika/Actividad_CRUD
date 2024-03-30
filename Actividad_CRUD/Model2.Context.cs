@@ -15,10 +15,10 @@ namespace Actividad_CRUD
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class tiendaEntities : DbContext
+    public partial class tiendaEntities1 : DbContext
     {
-        public tiendaEntities()
-            : base("name=tiendaEntities")
+        public tiendaEntities1()
+            : base("name=tiendaEntities1")
         {
         }
     

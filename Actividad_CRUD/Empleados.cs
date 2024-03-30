@@ -14,8 +14,17 @@ namespace Actividad_CRUD
     
     public partial class Empleados
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Empleados()
+        {
+            this.Usuarios = new HashSet<Usuarios>();
+        }
+    
         public int IDEmpleado { get; set; }
         public string NombreEmpleado { get; set; }
         public string Cargo { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Usuarios> Usuarios { get; set; }
     }
 }
