@@ -76,6 +76,8 @@
             this.btnEliminarVentas = new System.Windows.Forms.Button();
             this.btnModificarVentas = new System.Windows.Forms.Button();
             this.btnAgregarVentas = new System.Windows.Forms.Button();
+            this.lblIDProducto = new System.Windows.Forms.Label();
+            this.txtIDProducto = new System.Windows.Forms.TextBox();
             this.Tienda.SuspendLayout();
             this.Empleado.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEmpleado)).BeginInit();
@@ -249,6 +251,8 @@
             this.dgvCategoria.RowTemplate.Height = 28;
             this.dgvCategoria.Size = new System.Drawing.Size(528, 269);
             this.dgvCategoria.TabIndex = 11;
+            this.dgvCategoria.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCategoria_CellClick);
+            this.dgvCategoria.Click += new System.EventHandler(this.dgvCategoria_Click);
             // 
             // btnEliminarCategoria
             // 
@@ -293,6 +297,8 @@
             // 
             // gbInventario
             // 
+            this.gbInventario.Controls.Add(this.lblIDProducto);
+            this.gbInventario.Controls.Add(this.txtIDProducto);
             this.gbInventario.Controls.Add(this.lblInventario);
             this.gbInventario.Controls.Add(this.txtInventario);
             this.gbInventario.Controls.Add(this.dgvInventario);
@@ -340,6 +346,7 @@
             this.btnEliminarInventario.TabIndex = 10;
             this.btnEliminarInventario.Text = "Eliminar";
             this.btnEliminarInventario.UseVisualStyleBackColor = true;
+            this.btnEliminarInventario.Click += new System.EventHandler(this.btnEliminarInventario_Click);
             // 
             // btnModificarInventario
             // 
@@ -574,11 +581,27 @@
             this.btnAgregarVentas.Text = "Agregar";
             this.btnAgregarVentas.UseVisualStyleBackColor = true;
             // 
+            // lblIDProducto
+            // 
+            this.lblIDProducto.AutoSize = true;
+            this.lblIDProducto.Location = new System.Drawing.Point(586, 120);
+            this.lblIDProducto.Name = "lblIDProducto";
+            this.lblIDProducto.Size = new System.Drawing.Size(94, 20);
+            this.lblIDProducto.TabIndex = 15;
+            this.lblIDProducto.Text = "ID Producto";
+            // 
+            // txtIDProducto
+            // 
+            this.txtIDProducto.Location = new System.Drawing.Point(586, 146);
+            this.txtIDProducto.Name = "txtIDProducto";
+            this.txtIDProducto.Size = new System.Drawing.Size(270, 26);
+            this.txtIDProducto.TabIndex = 14;
+            // 
             // FormularioPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1017, 486);
+            this.ClientSize = new System.Drawing.Size(1014, 486);
             this.Controls.Add(this.Tienda);
             this.Name = "FormularioPrincipal";
             this.ShowIcon = false;
@@ -659,5 +682,7 @@
         private System.Windows.Forms.Button btnAgregarVentas;
         private System.Windows.Forms.Label lblMontoVenta;
         private System.Windows.Forms.TextBox txtMontoVenta;
+        private System.Windows.Forms.Label lblIDProducto;
+        private System.Windows.Forms.TextBox txtIDProducto;
     }
 }

@@ -16,10 +16,13 @@ namespace Actividad_CRUD
         public FormularioPrincipal()
         {
             InitializeComponent();
+            dgvCategoria.CellClick += dgvCategoria_CellClick;
         }
         // Establece la cadena de conexión a tu base de datos
         string connectionString = @"Data Source =DESKTOP-RELURNF\SQLEXPRESS; Initial Catalog = tienda; Integrated Security = True;";
         Datos datos = new Datos();
+        int id;
+        string NombreCategoria;
 
         private void tabPage2_Click(object sender, EventArgs e)
         {
@@ -79,20 +82,19 @@ namespace Actividad_CRUD
                 }
             }
             dgvCategoria.DataSource = datos.Categorias();
-
         }
 
         private void btnEliminarCategoria_Click(object sender, EventArgs e)
         {// Crea la conexión
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-
+                connection.Open();
                 // Crea el comando para el procedimiento almacenado
                 using (SqlCommand command = new SqlCommand("EliminarCategoria", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     // Agrega parámetros si es necesario
-                    command.Parameters.AddWithValue("@NombreCategoria", txtcategoria.Text);
+                    command.Parameters.AddWithValue("@IDCategoria", id);
                     // Ejecuta el procedimiento almacenado
                     command.ExecuteNonQuery();
                 }
@@ -106,16 +108,18 @@ namespace Actividad_CRUD
             // Crea la conexión
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-
+                connection.Open();
                 // Crea el comando para el procedimiento almacenado
                 using (SqlCommand command = new SqlCommand("ModificarCategoria", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     // Agrega parámetros si es necesario
-                    command.Parameters.AddWithValue("@NombreCategoria", txtcategoria.Text);
+                    command.Parameters.AddWithValue("@IDCategoria", id);
+                    command.Parameters.AddWithValue("@NuevoNombreCategoria",txtcategoria.Text );
                     // Ejecuta el procedimiento almacenado
                     command.ExecuteNonQuery();
                 }
+                dgvCategoria.DataSource = datos.Categorias();
 
             }
 
@@ -163,12 +167,12 @@ namespace Actividad_CRUD
                     command.CommandType = CommandType.StoredProcedure;
                     // Agrega parámetros si es necesario
                     command.Parameters.AddWithValue("@NombreEmpleado", txtEmpleado.Text);
-                    command.Parameters.AddWithValue("@Cargo",txtCargo);
+                    command.Parameters.AddWithValue("@Cargo",txtCargo.Text);
                     // Ejecuta el procedimiento almacenado
                     command.ExecuteNonQuery();
                 }
             }
-            dgvEmpleado.DataSource = datos.Categorias();
+            dgvEmpleado.DataSource = datos.Empleados();
 
         }
 
@@ -180,11 +184,11 @@ namespace Actividad_CRUD
                 // Abre la conexión
                 connection.Open();
                 // Crea el comando para el procedimiento almacenado
-                using (SqlCommand command = new SqlCommand("AgregarCategoria", connection))
+                using (SqlCommand command = new SqlCommand("AgregarInventario", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     // Agrega parámetros si es necesario
-                    command.Parameters.AddWithValue("@NombreCategoria", txtcategoria.Text);
+                    command.Parameters.AddWithValue("@CantidadEnStock", txtCantidad.Text);
                     // Ejecuta el procedimiento almacenado
                     command.ExecuteNonQuery();
                 }
@@ -195,24 +199,48 @@ namespace Actividad_CRUD
 
         private void btnAgregarProductos_Click(object sender, EventArgs e)
         {
-            //// Crea la conexión
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            //{
-            //    // Abre la conexión
-            //    connection.Open();
-            //    // Crea el comando para el procedimiento almacenado
-            //    using (SqlCommand command = new SqlCommand("AgregarProducto", connection))
-            //    {
-            //        command.CommandType = CommandType.StoredProcedure;
-            //        // Agrega parámetros si es necesario
-            //        command.Parameters.AddWithValue("@NombreProducto", txtProducto.Text);
-            //        command.Parameters.AddWithValue("@IDCategoria", txt);
-            //        command.Parameters.AddWithValue("@NombreProducto", txtcategoria.Text);
-            //        // Ejecuta el procedimiento almacenado
-            //        command.ExecuteNonQuery();
-            //    }
-            //}
-            //dgvProductos.DataSource = datos.Categorias();
+            // Crea la conexión
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                // Abre la conexión
+                connection.Open();
+                // Crea el comando para el procedimiento almacenado
+                using (SqlCommand command = new SqlCommand("AgregarProducto", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    // Agrega parámetros si es necesario
+                    command.Parameters.AddWithValue("@NombreProducto", txtProducto.Text);
+                    command.Parameters.AddWithValue("@NombreProducto", txtcategoria.Text);
+                    // Ejecuta el procedimiento almacenado
+                    command.ExecuteNonQuery();
+                }
+            }
+            dgvProductos.DataSource = datos.Categorias();
+
+        }
+
+        private void btnEliminarInventario_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvCategoria_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvCategoria_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+                // Verifica si la celda clickeada no es el encabezado de la fila
+                if (e.RowIndex >= 0)
+                {
+                    // Obtén el valor de la celda que contiene el ID (supongamos que está en la primera columna)
+                    DataGridViewRow fila = dgvCategoria.Rows[e.RowIndex];
+                    id = Convert.ToInt32(fila.Cells["IDCategoria"].Value); // Reemplaza "IDColumna" con el nombre de tu columna de ID
+                     // MessageBox.Show("El ID seleccionado es: " + id.ToString());
+                    //NombreCategoria =Convert.ToString(fila.Cells["IDCategoria"].Value);
+                 }
 
         }
     }
