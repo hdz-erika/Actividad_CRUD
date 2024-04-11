@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="tiendaDataSet6" targetNamespace="http://tempuri.org/tiendaDataSet6.xsd" xmlns:mstns="http://tempuri.org/tiendaDataSet6.xsd" xmlns="http://tempuri.org/tiendaDataSet6.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="tiendaConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="tiendaConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.Actividad_CRUD.Properties.Settings.GlobalReference.Default.tiendaConnectionString" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="VistaVentasConNombreTableAdapter" GeneratorDataComponentClassName="VistaVentasConNombreTableAdapter" Name="VistaVentasConNombre" UserDataComponentName="VistaVentasConNombreTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="tiendaConnectionString (Settings)" DbObjectName="tienda.dbo.VistaVentasConNombre" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT IDVenta, IDProducto, NombreProducto, CantidadEnStock, FechaVenta, Cantidad, MontoVenta FROM dbo.VistaVentasConNombre</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="IDVenta" DataSetColumn="IDVenta" />
+              <Mapping SourceColumn="IDProducto" DataSetColumn="IDProducto" />
+              <Mapping SourceColumn="NombreProducto" DataSetColumn="NombreProducto" />
+              <Mapping SourceColumn="CantidadEnStock" DataSetColumn="CantidadEnStock" />
+              <Mapping SourceColumn="FechaVenta" DataSetColumn="FechaVenta" />
+              <Mapping SourceColumn="Cantidad" DataSetColumn="Cantidad" />
+              <Mapping SourceColumn="MontoVenta" DataSetColumn="MontoVenta" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="tiendaDataSet6" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_UserDSName="tiendaDataSet6" msprop:Generator_DataSetName="tiendaDataSet6">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="VistaVentasConNombre" msprop:Generator_RowEvHandlerName="VistaVentasConNombreRowChangeEventHandler" msprop:Generator_RowDeletedName="VistaVentasConNombreRowDeleted" msprop:Generator_RowDeletingName="VistaVentasConNombreRowDeleting" msprop:Generator_RowEvArgName="VistaVentasConNombreRowChangeEvent" msprop:Generator_TablePropName="VistaVentasConNombre" msprop:Generator_RowChangedName="VistaVentasConNombreRowChanged" msprop:Generator_RowChangingName="VistaVentasConNombreRowChanging" msprop:Generator_TableClassName="VistaVentasConNombreDataTable" msprop:Generator_RowClassName="VistaVentasConNombreRow" msprop:Generator_TableVarName="tableVistaVentasConNombre" msprop:Generator_UserTableName="VistaVentasConNombre">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="IDVenta" msprop:Generator_ColumnPropNameInRow="IDVenta" msprop:Generator_ColumnPropNameInTable="IDVentaColumn" msprop:Generator_ColumnVarNameInTable="columnIDVenta" msprop:Generator_UserColumnName="IDVenta" type="xs:int" />
+              <xs:element name="IDProducto" msprop:Generator_ColumnPropNameInRow="IDProducto" msprop:Generator_ColumnPropNameInTable="IDProductoColumn" msprop:Generator_ColumnVarNameInTable="columnIDProducto" msprop:Generator_UserColumnName="IDProducto" type="xs:int" />
+              <xs:element name="NombreProducto" msprop:Generator_ColumnPropNameInRow="NombreProducto" msprop:Generator_ColumnPropNameInTable="NombreProductoColumn" msprop:Generator_ColumnVarNameInTable="columnNombreProducto" msprop:Generator_UserColumnName="NombreProducto" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="100" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CantidadEnStock" msprop:Generator_ColumnPropNameInRow="CantidadEnStock" msprop:Generator_ColumnPropNameInTable="CantidadEnStockColumn" msprop:Generator_ColumnVarNameInTable="columnCantidadEnStock" msprop:Generator_UserColumnName="CantidadEnStock" type="xs:int" minOccurs="0" />
+              <xs:element name="FechaVenta" msprop:Generator_ColumnPropNameInRow="FechaVenta" msprop:Generator_ColumnPropNameInTable="FechaVentaColumn" msprop:Generator_ColumnVarNameInTable="columnFechaVenta" msprop:Generator_UserColumnName="FechaVenta" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Cantidad" msprop:Generator_ColumnPropNameInRow="Cantidad" msprop:Generator_ColumnPropNameInTable="CantidadColumn" msprop:Generator_ColumnVarNameInTable="columnCantidad" msprop:Generator_UserColumnName="Cantidad" type="xs:int" minOccurs="0" />
+              <xs:element name="MontoVenta" msprop:Generator_ColumnPropNameInRow="MontoVenta" msprop:Generator_ColumnPropNameInTable="MontoVentaColumn" msprop:Generator_ColumnVarNameInTable="columnMontoVenta" msprop:Generator_UserColumnName="MontoVenta" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

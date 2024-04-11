@@ -107,6 +107,31 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>tiendaDataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Include="tiendaDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tiendaDataSet2.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="tiendaDataSet3.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tiendaDataSet3.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="tiendaDataSet4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tiendaDataSet4.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="tiendaDataSet5.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tiendaDataSet5.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="tiendaDataSet6.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>tiendaDataSet6.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Usuarios.cs">
       <DependentUpon>Model2.tt</DependentUpon>
     </Compile>
@@ -127,6 +152,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EntityDeploy Include="Model2.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -167,6 +193,61 @@
     <None Include="tiendaDataSet1.xss">
       <DependentUpon>tiendaDataSet1.xsd</DependentUpon>
     </None>
+    <None Include="tiendaDataSet2.xsc">
+      <DependentUpon>tiendaDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="tiendaDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>tiendaDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tiendaDataSet2.xss">
+      <DependentUpon>tiendaDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="tiendaDataSet3.xsc">
+      <DependentUpon>tiendaDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="tiendaDataSet3.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>tiendaDataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tiendaDataSet3.xss">
+      <DependentUpon>tiendaDataSet3.xsd</DependentUpon>
+    </None>
+    <None Include="tiendaDataSet4.xsc">
+      <DependentUpon>tiendaDataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="tiendaDataSet4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>tiendaDataSet4.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tiendaDataSet4.xss">
+      <DependentUpon>tiendaDataSet4.xsd</DependentUpon>
+    </None>
+    <None Include="tiendaDataSet5.xsc">
+      <DependentUpon>tiendaDataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="tiendaDataSet5.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>tiendaDataSet5.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tiendaDataSet5.xss">
+      <DependentUpon>tiendaDataSet5.xsd</DependentUpon>
+    </None>
+    <None Include="tiendaDataSet6.xsc">
+      <DependentUpon>tiendaDataSet6.xsd</DependentUpon>
+    </None>
+    <None Include="tiendaDataSet6.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>tiendaDataSet6.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="tiendaDataSet6.xss">
+      <DependentUpon>tiendaDataSet6.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -182,6 +263,19 @@
       <DependentUpon>Model2.edmx</DependentUpon>
       <LastGenOutput>Model2.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\Imagen de WhatsApp 2024-04-04 a las 17.01.34_aeb77b88.jpg" />
+    <None Include="Resources\icons8-cerrar-ventana-48.png" />
+    <None Include="Resources\cerrar.png" />
+    <None Include="Resources\cerrar-ventana.png" />
+    <None Include="Resources\undraw_welcome_cats_thqn.png" />
+    <None Include="Resources\PhLockKey%281%29.png" />
+    <None Include="Resources\PhUserCircleThin%281%29.png" />
+    <None Include="Resources\PhUserCircleThin.png" />
+    <None Include="Resources\PhLockKey.png" />
+    <None Include="Resources\Logo sobre moda femenina minimalista neutral.png" />
+    <None Include="Resources\images.jpeg" />
+    <None Include="Resources\06df18c2bb1a1509002c75a25c533b971.jpg" />
+    <None Include="Resources\06df18c2bb1a1509002c75a25c533b97.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

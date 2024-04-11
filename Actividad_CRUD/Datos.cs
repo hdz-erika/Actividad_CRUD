@@ -50,7 +50,7 @@ namespace Actividad_CRUD
         public DataTable Productos()
         {
             string conectionString;
-            string Query = "SELECT * FROM Productos wihth(nolock)";
+            string Query = "SELECT * FROM VistaProductosConNombre wihth(nolock)";
 
             conectionString = Conexion();
 
@@ -76,38 +76,39 @@ namespace Actividad_CRUD
                 }
             }
         }
-        public DataTable Ventas()
+public DataTable Ventas()
+{
+    string conectionString;
+    string Query = "SELECT * FROM VistaVentasConNombre wihth(nolock)";
+
+    conectionString = Conexion();
+
+    using (SqlConnection connection = new SqlConnection(conectionString))
+    {
+        connection.Open();
+        SqlCommand command = new SqlCommand(Query, connection);
+        SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
+
+        DataTable dataTable = new DataTable();
+
+        try
         {
-            string conectionString;
-            string Query = "SELECT * FROM Ventas wihth(nolock)";
+            // Llenar el DataTable con los datos de la consulta
+            dataAdapter.Fill(dataTable);
 
-            conectionString = Conexion();
-
-            using (SqlConnection connection = new SqlConnection(conectionString))
-            {
-                connection.Open();
-                SqlCommand command = new SqlCommand(Query, connection);
-                SqlDataAdapter dataAdapter = new SqlDataAdapter(command);
-
-                DataTable dataTable = new DataTable();
-
-                try
-                {
-                    dataAdapter.Fill(dataTable);
-
-                    connection.Close();
-                    return dataTable;
-                }
-                catch (Exception ex)
-                {
-
-                    connection.Close();
-                //hjhjjhhj
-                    return null;
-                    //jhjgkgjhggjg
-                }
-            }
+            connection.Close();
+            return dataTable;
         }
+        catch (Exception ex)
+        {
+            // Manejar cualquier excepción que pueda ocurrir
+            Console.WriteLine("Error: " + ex.Message);
+            connection.Close();
+            return null;
+        }
+    }
+}
+
         public DataTable Empleados()
         {
             string conectionString;
